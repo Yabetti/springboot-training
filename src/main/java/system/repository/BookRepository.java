@@ -26,9 +26,9 @@ public class BookRepository {
     /**
      * データ挿入用SQL
      */
-    private static final String INSERT_SQL = "INSERT INTO Book (title, publisher, price, isbn) VALUE (?1,?2,?3,?4)";    // (13)
-      
-      
+    private static final String INSERT_SQL = "INSERT INTO Book (title, publisher, price, isbn) VALUES (?1,?2,?3,?4)";    // (13)
+
+
     /**
      * データ更新用SQL
      */
@@ -57,7 +57,7 @@ public class BookRepository {
         Query query = entityManager.createNativeQuery(FIND_BY_ID_SQL, Book.class);
         // (17) 書籍IDをパラメータとして設定する。
           query.setParameter(1,id);
-          
+
         // SQLを実行し、書籍データを1件取得する。
         return (Book) query.getSingleResult();
     }
@@ -74,9 +74,9 @@ public class BookRepository {
           query.setParameter(2, book.getPublisher());
           query.setParameter(3, book.getPrice());
           query.setParameter(4, book.getIsbn());
-          
+
         // SQLを実行する。
-        query.executeUpdate();
+          query.executeUpdate();
     }
 
     /**
@@ -92,7 +92,7 @@ public class BookRepository {
         query.setParameter(3, book.getPrice());
         query.setParameter(4, book.getIsbn());
         query.setParameter(5,book.getId());
-        
+
         // SQLを実行する。
         query.executeUpdate();
     }

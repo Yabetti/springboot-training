@@ -8,6 +8,8 @@
 本課題は下記の手順で実装する。
 
 1. (1)のJavaプログラムを記述しなさい。(``BookController.java``)
+   @@@return regist ⇒ return redirect: /regist に変更
+   
 1. (9)のJavaプログラムを記述しなさい。(``BookService.java``)
 1. (13)と(18)のJavaプログラムを記述しなさい。(``BookRepository.java``)
 
