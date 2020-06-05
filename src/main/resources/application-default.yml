@@ -8,7 +8,8 @@ datasource:
   # Hibernate設定
   # 実行したSQLを整形して表示、起動時に必ずdrop tableする
   hibernate:
-    ddlAuto: create-drop
+    #ddlAuto: create-drop
+    ddlAuto: update
     dialect: org.hibernate.dialect.H2Dialect
     formatSql: true
     showSql: true

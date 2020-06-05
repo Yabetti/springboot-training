@@ -33,7 +33,7 @@ public class BookService {
     public Book findById(long id) {
         Book book = new Book();
         // (8) リポジトリより、書籍IDを指定して書籍データを取得する。
-           book= repo.findById(id);
+        book= repo.findById(id);
         return book;
     }
 
@@ -61,7 +61,7 @@ public class BookService {
      */
     public void deleteBook(Book book) {
         // (11) リポジトリより、削除したい書籍データを渡して削除する。
-
+        repo.delete(book);
     }
 
     /**
@@ -81,7 +81,9 @@ public class BookService {
     public List<Book> findByTitle(String titleSearch) {
         List<Book> books = new ArrayList<Book>();
         // (12) リポジトリより、指定した書籍タイトルで書籍情報を検索する。
+        books = repo.findByTitle(titleSearch);
 
+        System.out.print("aaa");
         return books;
     }
 

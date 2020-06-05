@@ -16,7 +16,7 @@ public class BookRepository {
     /**
      * 1件検索用SQL(ID指定)
      */
-    private static final String FIND_BY_ID_SQL = "SELECT * from Book Where id=?1";    // (12)
+    private static final String FIND_BY_ID_SQL = "SELECT * FROM Book WHERE id=?1";    // (12)
 
     /**
      * 全件検索用SQL
@@ -32,17 +32,18 @@ public class BookRepository {
     /**
      * データ更新用SQL
      */
-    private static final String UPDATE_SQL = "UPDATE Book SET title=?, publisher=?, price=?, isban=?, WHERE id-?";    // (14)
+    private static final String UPDATE_SQL = "UPDATE Book SET title=?, publisher=?, price=?, isbn=? WHERE id=?";    // (14)
 
     /**
      * データ削除用SQL
      */
-    private static final String DELETE_SQL = "";    // (15)
+    private static final String DELETE_SQL = "DELETE FROM Book WHERE id = ?";    // (15)
 
     /**
      * タイトル検索用SQL
      */
-    private static final String FIND_TITLE_SQL = "";    // (16)
+    //private static final String FIND_TITLE_SQL = "SELECT * FROM Book WHERE title = ?";    // (16)
+    private static final String FIND_TITLE_SQL = "SELECT * FROM Book WHERE title like ?";    // (16)
 
     @PersistenceContext(unitName = "entityManagerFactory")
     private EntityManager entityManager;
@@ -57,7 +58,6 @@ public class BookRepository {
         Query query = entityManager.createNativeQuery(FIND_BY_ID_SQL, Book.class);
         // (17) 書籍IDをパラメータとして設定する。
           query.setParameter(1,id);
-
         // SQLを実行し、書籍データを1件取得する。
         return (Book) query.getSingleResult();
     }
@@ -105,7 +105,7 @@ public class BookRepository {
         // SQLを定義
         Query query = entityManager.createNativeQuery(DELETE_SQL, Book.class);
         // (20)　書籍IDをパラメータとして設定する。
-
+        query.setParameter(1,book.getId());
         // SQLを実行する。
         query.executeUpdate();
     }
@@ -131,6 +131,7 @@ public class BookRepository {
     public List<Book> findByTitle(String titleSearch) {
         // SQLを定義
         Query query = entityManager.createNativeQuery(FIND_TITLE_SQL, Book.class);
+        query.setParameter(1, '%'+titleSearch+'%');
         // (21) 書籍タイトルをパラメータとして設定する。
 
         // 書籍データを複数件取得する。

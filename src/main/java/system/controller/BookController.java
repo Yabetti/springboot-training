@@ -95,7 +95,7 @@ public class BookController {
     public String detailBook(ModelMap model, @PathVariable int id) {
         Book book = new Book();
         // (2) サービスより、画面から取得した書籍IDで書籍データを取得する。
-
+        book = service.findById(id);
         // 画面に取得した書籍データを設定する。
         model.addAttribute("book", book);
         // 詳細画面を返す。
@@ -112,7 +112,7 @@ public class BookController {
     public String editBook(ModelMap model, @PathVariable int id) {
         Book book = new Book();
         // (3) サービスより、画面から取得した書籍IDで書籍データを取得する。
-
+        book = service.findById(id);
         // 画面に取得した書籍データを設定する。
         model.addAttribute("book", book);
         // 編集画面を返す。
@@ -133,10 +133,8 @@ public class BookController {
         if(result.hasErrors()) {
             return "edit";
         }
-
         // (4) サービスより、入力された内容で書籍データを更新する。
-
-
+        service.updateBook(book);
         // トップ画面に遷移(リダイレクト)する。
         return "redirect:/list";
     }
@@ -149,9 +147,10 @@ public class BookController {
     @GetMapping("/delete-{id}-book")
     public String deleteBook(@PathVariable int id) {
         // (5) サービスより、画面から取得した書籍IDで書籍データを取得する。
-
+        Book book = new Book();
+        book = service.findById(id);
         // (6) 取得した書籍データをサービスより削除する。
-
+        service.deleteBook(book);
         // トップ画面に遷移(リダイレクト)する。
         return "redirect:/list";
     }
@@ -166,11 +165,10 @@ public class BookController {
     public String searchBook(TitleSearch search, ModelMap model) {
         List<Book> books = new ArrayList<Book>();
         // (7) サービスより、画面から取得したキーワードでタイトルを検索する。
-
+        books = service.findByTitle(search.getBookTitle());
         // 取得した書籍一覧を画面に設定する。
         model.addAttribute("books", books);
         // トップ画面を返す。
         return "list";
     }
-
 }

@@ -28,40 +28,34 @@
     <div class="main ui container">
       <!-- (22) -->
          <form th:object="${book}" method="post">
-     <div class="ui form">
-      <div th:classappend="${#fields.hasErrors('title')} ? 'field error' : 'field'">
-            <label for="title">書籍タイトル</label>
-            <input th:field="*{title}" id="title" type="text" />
-            <label th:if="${#fields.hasErrors('title')}" th:errors="*{title}">error!</label>
-          </div>
-              
-       <div th:classappend="${#fields.hasErrors('publisher')} ? 'field error' : 'field'">
-            <label for="publisher">出版社名</label>
-            <input th:field="*{publisher}" id="publisher" type="text" value="${book.publisher}" />
-            <label th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}">error!</label>
-          </div>
-          
-       <div th:classappend="${#fields.hasErrors('price')} ? 'field error' : 'field'">
-            <label for="price">価格</label>
-            <div class="ui labeled input">
-              <div class="ui label">￥</div>
-              <input th:field="*{price}" id="price" type="text" value="${book.price} " />
-            </div>
-            <label th:if="${#fields.hasErrors('price')}" th:errors="*{price}">error!</label>
-          </div>
-          
-          <div th:classappend="${#fields.hasErrors('isbn')} ? 'field error' : 'field'">
-            <label for="isbn">ISBN13</label>
-            <div class="ui labeled input">
-              <div class="ui label">ISBN13</div>
-              <input th:field="*{isbn}" id="isbn" type="text" value="${book.isbn}" />
-            </div>
-            <label th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">error!</label>
-          </div>
-          
-           <button type="submit" class="ui primary button">登録</button>
-          <a th:href="@{/list}" class="ui button">キャンセル</a>
+      <div class="ui form">
+
+        <label for="title">書籍タイトル</label>
+        <div th:classappend="${#fields.hasErrors('title')} ? 'field error' : 'field'">
+          <input th:field="*{title}" id="title" type="text" />
+          <label th:if="${#fields.hasErrors('title')}" th:errors="*{title}">error!</label>
         </div>
+
+        <label for="publisher">出版社名</label>
+        <div th:classappend="${#fields.hasErrors('publisher')} ? 'field error' : 'field'">
+          <input th:field="*{publisher}" id="publisher" type="text" />
+          <label th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}">error!</label>
+        </div>
+        <label for="price">価格</label>
+        <div th:classappend="${#fields.hasErrors('price')} ? 'field error' : 'field'">
+          <input th:field="*{price}" id="price" type="text" />
+          <label th:if="${#fields.hasErrors('price')}" th:errors="*{price}">error!</label>
+        </div>
+
+        <label for="isbn">ISBN13</label>
+        <div th:classappend="${#fields.hasErrors('isbn')} ? 'field error' : 'field'">
+          <input th:field="*{isbn}" id="isbn" type="text" />
+          <label th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}">error!</label>
+        </div>
+
+        <button type="submit" class="ui primary button">編集</button>
+        <a th:href="@{/list}" class="ui button">キャンセル</a>
+     </div>
       </form>
     </div>
   </div>
